@@ -1,6 +1,6 @@
 import { isLoading, hasErrored, storeHouse } from '../actions'
 
-export const fetchHouse = async (url) => {
+export const fetchHouse = (url) => {
   return async (dispatch) => {
     try {
       dispatch(isLoading(true))

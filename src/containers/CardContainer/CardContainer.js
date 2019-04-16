@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Card } from '../../components/Card/Card'
+
 
 export class CardContainer extends Component {
   constructor() {
@@ -9,10 +11,16 @@ export class CardContainer extends Component {
   }
 
   render() {
+  
+    let allHouses = this.props.houses.map(house => <Card {...house} />)    
     return (
-      <div></div>
+      <div>
+        {allHouses}
+      </div>
     )
   }
 }
+
+
 
 export default CardContainer 

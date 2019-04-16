@@ -13,7 +13,6 @@ class App extends Component {
     }
   }
 
-  //component did mount call an action
   getHouses = () => {
     const url = 'http://localhost:3001/api/v1/houses'
     this.props.fetchHouse(url)
@@ -28,7 +27,7 @@ class App extends Component {
         </div>
         <div className='Display-info'>
         </div>
-        <CardContainer />
+        <CardContainer houses={this.props.houses} />
         <button onClick={this.getHouses}>fetchHouse</button>
       </div>
     );
