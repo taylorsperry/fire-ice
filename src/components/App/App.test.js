@@ -1,7 +1,10 @@
 import App from './App'
 import { connect } from 'react-redux'
+import { shallow } from 'enzyme'
 
 describe('mstp', () => {
+  let wrapper = shallow(<App />)
+
   let initialState = {
     houses: [],
     loading: false,
@@ -14,13 +17,11 @@ describe('mstp', () => {
     error: ''
   }
 
+  let mapStateToProps = jest.fn()
 
-  let expected = {
-    houses: [],
-    loading: false,
-    error: ''
-  }
   let mappedProps = mapStateToProps(mockState)
-  mappedProps.
-  expect(mappedProps).toEqual(expected)
+
+  wrapper.instance.mappedProps()
+
+  expect(mappedProps).toEqual(mockState)
 })
