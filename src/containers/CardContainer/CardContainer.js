@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Card } from '../../components/Card/Card'
+import { connect } from 'react-redux'
+import wolf from '../../assets/wolf.gif'
 
 
 export class CardContainer extends Component {
@@ -12,15 +14,24 @@ export class CardContainer extends Component {
 
   render() {
   
-    let allHouses = this.props.houses.map(house => <Card {...house} />)    
+    let allHouses = this.props.houses.map(house => <Card {...house} />)  
+    let image 
+
+    if (this.props.loading) {
+      image = <img src={wolf} alt="Wolf"/>
+    }
+    
     return (
       <div>
+        {image}
         {allHouses}
       </div>
     )
   }
 }
 
+export const mapStateToProps = (state) => ({
+  loading: state.loading
+})
 
-
-export default CardContainer 
+export default connect(mapStateToProps)(CardContainer) 
