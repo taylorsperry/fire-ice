@@ -5,14 +5,12 @@ import './App.css';
 import { connect } from 'react-redux'
 import { fetchHouse } from '../../thunks/fetchHouse'
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state={
-      dummy: 'dummy'
-    }
-  }
+export class App extends Component {
 
+  componentDidMount() {
+    this.getHouses()
+  }
+ 
   getHouses = () => {
     const url = 'http://localhost:3001/api/v1/houses'
     this.props.fetchHouse(url)
@@ -26,21 +24,20 @@ class App extends Component {
           <h2>Welcome to Westeros</h2>
         </div>
         <div className='Display-info'>
+          <CardContainer houses={this.props.houses} />
         </div>
-        <CardContainer houses={this.props.houses} />
-        <button onClick={this.getHouses}>fetchHouse</button>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   houses: state.houses,
   loading: state.loading,
   error: state.error
 })
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   fetchHouse: (url) => dispatch(fetchHouse(url))
 })
 

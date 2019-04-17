@@ -1,27 +1,43 @@
-import App from './App'
-import { connect } from 'react-redux'
-import { shallow } from 'enzyme'
+import { App, mapStateToProps, mapDispatchToProps } from './App'
 
-describe('mstp', () => {
-  let wrapper = shallow(<App />)
+import { fetchHouse } from '../../thunks/fetchHouse'
 
-  let initialState = {
-    houses: [],
-    loading: false,
-    error: ''
-  }
+jest.mock('../../thunks/fetchHouse')
 
-  let mockState = {
-    houses: ['one', 'two'],
-    loading: false,
-    error: ''
-  }
+describe('mapStateToProps', () => {
+  it('should return an object with houses, loading, and error', () => {
+    const mockState = {
+      houses: ['one', 'two'],
+      loading: false,
+      error: ''
+    }
 
-  let mapStateToProps = jest.fn()
+    const expected = {
+      houses: ['one', 'two'],
+      loading: false,
+      error: ''
+    }
 
-  let mappedProps = mapStateToProps(mockState)
+    const mappedProps = mapStateToProps(mockState)
+    expect(mappedProps).toEqual(expected)
+  })
+})
 
-  wrapper.instance.mappedProps()
+describe('mapDispatchToProps', () => {
+  it('calls dispatch with fetchHouse', async () => {
 
-  expect(mappedProps).toEqual(mockState)
+    const mockUrl = 'wwww'
+    const mockDispatch = jest.fn()
+    const mockData = ['one', 'two']
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve(mockData)
+    }))
+
+    const thunk = fetchHouse(mockUrl)
+    await thunk(mockDispatch)
+
+    expect(mockDispatch).toHaveBeenCalledWith(fetchHouse(mockUrl))
+  
+  })
 })

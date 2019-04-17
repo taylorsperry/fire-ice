@@ -22,7 +22,7 @@ export class CardContainer extends Component {
     }
     
     return (
-      <div>
+      <div className='Container'>
         {image}
         {allHouses}
       </div>

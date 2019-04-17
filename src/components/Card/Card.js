@@ -6,8 +6,8 @@ export class Card extends Component {
 
     const {name, founded, seats, titles, coatOfArms, ancestralWeapons, words} = this.props
     return (
-      <div>
-        {name}
+      <div className='Card'>
+        <h3>{name}</h3>
         {founded}
         {seats}
         {titles}

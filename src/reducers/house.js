@@ -10,7 +10,7 @@ export const loading = (state=false, action) => {
 export const error = (state='', action) => {
   switch (action.type) {
     case 'HAS_ERRORED':
-      return action.hasErrored
+      return action.message
     default: 
       return state
   }
